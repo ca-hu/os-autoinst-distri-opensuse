@@ -158,13 +158,13 @@ sub run {
 
 }
 
-sub post_fail_hook {
+sub post_run_hook {
     my ($self) = shift;
     select_console 'root-console';
     upload_logs('/var/log/audit/audit.log');
     script_run('journalctl > /tmp/logs_jour.txt');
     upload_logs('/tmp/logs_jour.txt');
-    $self->SUPER::post_fail_hook;
+    $self->SUPER::post_run_hook;
     upload_logs('/etc/hosts');
 }
 
