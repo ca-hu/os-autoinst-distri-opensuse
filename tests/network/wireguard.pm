@@ -155,7 +155,7 @@ sub run {
     wait_for_children if (get_var('IS_MM_SERVER'));
 }
 
-sub post_run_hook {
+sub post_fail_hook {
     my ($self) = shift;
     select_console 'root-console';
     upload_logs('/var/log/audit/audit.log');
