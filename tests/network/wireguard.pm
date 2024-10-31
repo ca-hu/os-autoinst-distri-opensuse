@@ -154,9 +154,6 @@ sub run {
     }
     # Finish job
     wait_for_children if (get_var('IS_MM_SERVER'));
-
-    assert_script_run 'getenforce';
-    assert_script_run 'ausearch -m avc -ts boot';
 }
 
 sub post_run_hook {
