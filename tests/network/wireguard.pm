@@ -32,6 +32,7 @@ sub start_wgquick {
 }
 
 sub run {
+    assert_script_run 'setenforce 0';
     if (get_var('IS_MM_SERVER')) {
         barrier_create 'SETUP_DONE', 2;
         barrier_create 'KEY_TRANSFERED', 2;
@@ -70,7 +71,6 @@ sub run {
         assert_script_run 'modprobe wireguard';
     }
 
-    assert_script_run 'setenforce 0';
     my $boot_config = '/boot/config-$(uname -r)';
     assert_script_run("grep -i CONFIG_WIREGUARD $boot_config") unless (script_run("stat $boot_config") != 0);
     assert_script_run 'modinfo wireguard';
