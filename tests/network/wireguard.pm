@@ -32,7 +32,6 @@ sub start_wgquick {
 }
 
 sub run {
-    assert_script_run 'setenforce 0';
     assert_script_run 'getenforce';
     assert_script_run 'semodule -DB';
     if (get_var('IS_MM_SERVER')) {
