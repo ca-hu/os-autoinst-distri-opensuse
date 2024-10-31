@@ -33,6 +33,8 @@ sub start_wgquick {
 
 sub run {
     assert_script_run 'setenforce 0';
+    assert_script_run 'getenforce';
+    assert_script_run 'semodule -DB';
     if (get_var('IS_MM_SERVER')) {
         barrier_create 'SETUP_DONE', 2;
         barrier_create 'KEY_TRANSFERED', 2;
@@ -152,6 +154,7 @@ sub run {
     }
     # Finish job
     wait_for_children if (get_var('IS_MM_SERVER'));
+    assert_script_run 'getenforce';
 
 }
 
