@@ -32,6 +32,7 @@ sub start_wgquick {
 }
 
 sub run {
+    assert_script_run 'setenforce 1';
     if (get_var('IS_MM_SERVER')) {
         barrier_create 'SETUP_DONE', 2;
         barrier_create 'KEY_TRANSFERED', 2;
@@ -152,6 +153,16 @@ sub run {
     # Finish job
     wait_for_children if (get_var('IS_MM_SERVER'));
 
+}
+
+sub post_fail_hook {
+    my ($self) = shift;
+    select_console 'root-console';
+    upload_logs('/var/log/audit/audit.log');
+    script_run('journalctl > /tmp/logs_jour.txt');
+    upload_logs('/tmp/logs_jour.txt');
+    $self->SUPER::post_fail_hook;
+    upload_logs('/etc/hosts');
 }
 
 1;
