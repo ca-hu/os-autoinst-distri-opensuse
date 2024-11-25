@@ -16,7 +16,7 @@ use autotest;
 use utils;
 use wicked::TestContext;
 use Utils::Architectures;
-use version_utils qw(:VERSION :BACKEND :SCENARIO is_community_jeos is_public_cloud);
+use version_utils qw(:VERSION :BACKEND :SCENARIO is_community_jeos is_public_cloud has_selinux_by_default);
 use Utils::Backends;
 use data_integrity_utils 'verify_checksum';
 use bmwqemu ();
