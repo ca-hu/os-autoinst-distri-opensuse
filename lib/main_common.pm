@@ -1107,7 +1107,7 @@ sub load_inst_tests {
             loadtest "installation/disable_grub_graphics";
         }
         # Do not run enable_selinux in systems that have SELinux default (bsc#1230118)
-        loadtest "installation/enable_selinux" if get_var('SELINUX') && !has_selinux_by_default;
+        loadtest "installation/enable_selinux" if get_var('SELINUX') && !has_selinux_by_default();
 
         if (check_var("UPGRADE", "LOW_SPACE")) {
             loadtest "installation/disk_space_release";
@@ -2311,7 +2311,7 @@ sub load_system_prepare_tests {
     loadtest 'console/install_rt_kernel' if check_var('SLE_PRODUCT', 'SLERT');
     loadtest 'console/force_scheduled_tasks' unless is_jeos;
     # Check SELinux failures when SELinux is enabled by default
-    loadtest 'console/check_selinux_fails' if get_var('SELINUX') || has_selinux_by_default;
+    loadtest 'console/check_selinux_fails' if get_var('SELINUX') || has_selinux_by_default();
     loadtest 'security/cc/ensure_crypto_checks_enabled' if check_var('SYSTEM_ROLE', 'Common_Criteria');
     # Remove repos pointing to download.opensuse.org and add snaphot repo from o3
     replace_opensuse_repos_tests if is_repo_replacement_required;
