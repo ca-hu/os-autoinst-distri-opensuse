@@ -31,7 +31,7 @@ sub run {
     # on arch64 platform any more, so skip the test on aarch64
     if (!is_aarch64) {
         # https://bugzilla.suse.com/show_bug.cgi?id=1236457
-        assert_script_run('udevadm control --reload-rules && udevadm trigger') if (is_sle '<=15-SP7');
+        assert_script_run('udevadm control --reload-rules && udevadm trigger');
 
         # Make sure tpm device can be created
         assert_script_run('ls -l /dev/tpm*');
