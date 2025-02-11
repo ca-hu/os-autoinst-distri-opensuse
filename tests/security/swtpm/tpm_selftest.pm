@@ -22,6 +22,7 @@ use version_utils 'is_sle';
 sub run {
     select_serial_terminal;
 
+    assert_script_run('udevadm control -l debug');
     # Version check
     my $pkg_list = {'tpm-tools' => '1.3.9.2', trousers => '0.3.15'};
     zypper_call("in " . join(' ', keys %$pkg_list));
